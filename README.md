@@ -61,6 +61,11 @@ You can then make it run without `-t` and maybe with other options.
 
 Tip: I use it through a systemd service in ArchLinux on my RaspberryPi so it's always running on my server.
 
+## License
+MIT
+
+---
+
 *Happy serving!*
 
     
