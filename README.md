@@ -31,7 +31,7 @@ the associated email/API key and the name of the zone record you want to keep sy
  -- although it make work with other models.
  
 ## Options
-    Usage: ruby dynamic_livebox_ip_cloudflare_dns.rb [options]
+    Usage: liveflare.rb [options]
     For informations about CloudFlare's API, visit: http://www.cloudflare.com/docs/host-api.html
         -h, --help                       Display this screen
         -a, --api-token [TOKEN]          Set CloudfFlare API token (REQUIRED)
@@ -39,7 +39,7 @@ the associated email/API key and the name of the zone record you want to keep sy
         -z, --api-zone [ZONE]            Set CloudFlare zone (REQUIRED) ex: baboon.io
         -s, --password [PASSWORD]        Livebox's admin password (defaults to 'admin')
         -i, --interval [SECONDS]         Time to wait between IP checks (defaults to 30)
-        -p, --pid-file [FILE]            Path to the PID file to use (defaults to /var/run/cf_livebox_dyndns.pid)
+        -p, --pid-file [FILE]            Path to the PID file to use (defaults to /var/run/liveflare.pid)
         -d, --[no-]daemon                If defined, the main loop runs daemonized
         -q, --quiet                      If defined, the script runs without outputing anything
         -t, --test                       If defined, tests getting server's ip from the livebox and cloudflare then outputs them along with cloudflare's zone record
@@ -48,7 +48,7 @@ the associated email/API key and the name of the zone record you want to keep sy
     mkdir liveflare && cd liveflare
     git clone git@github.com:LouisKottmann/liveflare.git
     bundle install
-    ruby dynamic_livebox_ip_cloudflare_dns.rb \
+    ruby liveflare.rb \
         -a CLOUDFLARE_API_TOKEN \
         -e CLOUDFLARE_ACCOUNT_EMAIL \
         -z CLOUDFLARE_ZONE_RECORD \
