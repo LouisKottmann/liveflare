@@ -54,8 +54,10 @@ the associated email/API key and the name of the zone record you want to keep sy
         -z CLOUDFLARE_ZONE_RECORD \
         -t
 
-It will make a test run, if this outputs Livebox's WAN IP, CloudFlare's current IP in your DNS entry there,
-and a bunch of informations about the zone record, you're all set!<br>
+This will make a test run.<br>
+If this outputs the Livebox's WAN IP, CloudFlare's current IP in your DNS entry there,
+and a bunch of informations about the zone record, the configuration is fine. 
+You can then make it run without `-t` and maybe with other options.
 
 Tip: I use it through a systemd service in ArchLinux on my RaspberryPi so it's always running on my server.
 
