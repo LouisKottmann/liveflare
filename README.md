@@ -5,7 +5,7 @@ that limits the number of calls you can make.
 
 It uses [mechanize](https://github.com/sparklemotion/mechanize) 
 to crawl [http://livebox](http://livebox)
-which points to [192.168.1.1](192.168.1.1), Livebox's admin panel, 
+which points to [http://192.168.1.1](http://192.168.1.1), Livebox's admin panel, 
 that knows the WAN IP of your connexion (a.k.a external IP)
 
 And the [CloudFlare API](http://www.cloudflare.com/docs/host-api.html)
