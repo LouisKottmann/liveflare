@@ -1,4 +1,6 @@
 # LiveFlare
+**Needs some more love at the moment, I'm on it!**
+
 Automatically updates a CloudFlare zone entry with the WAN IP of a Livebox, 
 without resorting to an external service such as checkip.dyndns.org 
 that limits the number of calls you can make.
