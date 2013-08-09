@@ -1,20 +1,32 @@
 #!/usr/bin/env ruby
 require 'dante'
-require_relative 'liveflare_lib'
+require_relative 'lib/liveflare'
 
-# Set default port to 8080
+class OptionParser
+  attr_accessor :stack
+end
+
 runner = Dante::Runner.new('liveflare')
-# Sets the description in 'help'
-runner.description = "For informations about CloudFlare's API, visit: http://www.cloudflare.com/docs/host-api.html"
+
+liveflare = LiveFlare.new
+
+def remove_switch(opts, short_name, long_name)
+  opts.stack[2].long.reject! { |k| k == long_name }
+  opts.stack[2].short.reject! { |k| k == short_name }
+end
 
 # Set custom options
 runner.with_options do |opts|
-  add_liveflare_options(opts)
+  remove_switch(opts, "port", "p")
+  liveflare.add_options(opts)
 end
 
 # Parse command-line options and execute the process
 runner.execute do |opts|
-  compute_liveflare_options
-  check_liveflare_options(opts)
-  start
+  liveflare.compute_options
+  if liveflare.missing_options?
+    runner.stop
+  else
+    liveflare.start
+  end
 end

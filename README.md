@@ -1,7 +1,5 @@
 # LiveFlare
-**Needs some more love at the moment, I'm on it!**
-
-Automatically updates a CloudFlare zone entry with the WAN IP of a Livebox, 
+Automatically updates a CloudFlare zone entry with the WAN IP of a Livebox,
 without resorting to an external service such as checkip.dyndns.org 
 that limits the number of calls you can make.
 
@@ -33,18 +31,25 @@ the associated email/API key and the name of the zone record you want to keep sy
  -- although it make work with other models.
  
 ## Options
-    Usage: liveflare.rb [options]
-    For informations about CloudFlare's API, visit: http://www.cloudflare.com/docs/host-api.html
-        -h, --help                       Display this screen
-        -a, --api-token [TOKEN]          Set CloudfFlare API token (REQUIRED)
-        -e, --api-email [EMAIL]          Set CloudFlare account email (REQUIRED)
-        -z, --api-zone [ZONE]            Set CloudFlare zone (REQUIRED) ex: baboon.io
-        -s, --password [PASSWORD]        Livebox's admin password (defaults to 'admin')
-        -i, --interval [SECONDS]         Time to wait between IP checks (defaults to 30)
-        -p, --pid-file [FILE]            Path to the PID file to use (defaults to /var/run/liveflare.pid)
-        -d, --[no-]daemon                If defined, the main loop runs daemonized
-        -q, --quiet                      If defined, the script runs without outputing anything
-        -t, --test                       If defined, tests getting server's ip from the livebox and cloudflare then outputs them along with cloudflare's zone record
+    Usage: ruby liveflare.rb [OPTIONS]
+
+        -P, --pid FILE            save PID in FILE when using -d option.
+                                  (default: /var/run/liveflare.pid)
+        -d, --daemon              Daemonize mode
+        -l, --log FILE            Logfile for output
+        -k, --kill [PORT]         Kill specified running daemons - leave blank to kill all.
+        -u, --user USER           User to run as
+        -G, --group GROUP         Group to run as
+        -a, --api-token [TOKEN]   Set CloudfFlare API token (REQUIRED)
+        -e, --api-email [EMAIL]   Set CloudFlare account email (REQUIRED)
+        -z, --api-zone [ZONE]     Set CloudFlare zone (REQUIRED) ex: baboon.io
+        -s, --password [PASSWORD] Livebox's admin password
+                                  (default: admin)
+        -i, --interval [SECONDS]  Time to wait between IP checks
+                                  (default: 30)
+        -q, --quiet               If defined, the script runs without outputing anything
+        -t, --test                If defined, tests getting server's ip from the livebox and cloudflare then outputs them along with cloudflare's zone record
+        -?, --help                Display this usage information.
 
 ## Installing and configuring
     mkdir liveflare && cd liveflare
@@ -59,7 +64,9 @@ the associated email/API key and the name of the zone record you want to keep sy
 This will make a test run.<br>
 If this outputs the Livebox's WAN IP, CloudFlare's current IP in your DNS entry there,
 and a bunch of informations about the zone record, the configuration is fine. 
-You can then make it run without `-t` and maybe with other options.
+You can then make it run without `-t` and maybe with other options (like `-d`).
+
+Don't forget to properly forward ports in your Livebox!
 
 Tip: I use it through a systemd service in ArchLinux on my RaspberryPi so it's always running on my server.
 
