@@ -6,6 +6,14 @@ class OptionParser
   attr_accessor :stack
 end
 
+module Dante
+  class Runner
+    def log(message)
+      puts "#{Time.now.strftime('%a %e/%m/%Y %H:%M')}: #{message}"
+    end
+  end
+end
+
 runner = Dante::Runner.new('liveflare')
 
 liveflare = LiveFlare.new

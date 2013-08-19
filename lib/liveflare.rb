@@ -169,7 +169,8 @@ class LiveFlare
       run_test
       return
     end
-
+	
+    auth_on_livebox
     #
     # MAIN LOOP
     #
