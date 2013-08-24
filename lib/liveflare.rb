@@ -62,13 +62,9 @@ class LiveFlare
   end
 
   def compute_options
-    $stdout.instance_eval do
-      if @options[:quiet]
+    if @options[:quiet]
+      $stdout.instance_eval do
         def write(*args)
-        end
-      else
-        def write(*args)
-          lflog(args)
         end
       end
     end
@@ -92,7 +88,7 @@ class LiveFlare
     @mecha.get @livebox_auth_url, @livebox_admin_params
   rescue Exception
     puts "Failed to authenticate on the Livebox! Retrying in 100s.."
-    puts $!
+    lflog $!
     sleep 100
     retry
   end
@@ -111,7 +107,7 @@ class LiveFlare
     nil
   rescue Exception
     puts "Failed to query #{@options[:api_zone]}'s IP on CloudFlare!"
-    puts $!
+    lflog $!
     nil
   end
 
@@ -159,7 +155,7 @@ class LiveFlare
     nil
   rescue Exception
     puts "Failed to retrieve Livebox's WANIP!"
-    puts $!
+    lflog $!
     nil
   end
 
