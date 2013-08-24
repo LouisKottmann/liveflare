@@ -69,7 +69,6 @@ class LiveFlare
       end
     end
 
-    lflog(message)
     # Params needed for every CloudFare API call
     @cloudflare_api_basic_params = {
       tkn:   @options[:api_token],
