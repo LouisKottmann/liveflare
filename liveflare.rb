@@ -9,7 +9,7 @@ end
 module Dante
   class Runner
     def log(message)
-      puts "#{Time.now.strftime('%a %e/%m/%Y %H:%M')}: #{message}"
+      lflog(message)
     end
   end
 end

@@ -1,6 +1,10 @@
 require 'json'
 require 'mechanize'
 
+def lflog(message)
+  puts "#{Time.now.strftime('%a %e/%m/%Y %H:%M')}: #{message}"
+end
+
 class LiveFlare
   def initialize
     # APIs URLs
@@ -58,8 +62,18 @@ class LiveFlare
   end
 
   def compute_options
-    $stdout.instance_eval{ def write(*args) end } if @options[:quiet]
+    $stdout.instance_eval do
+      if @options[:quiet]
+        def write(*args)
+        end
+      else
+        def write(*args)
+          lflog(args)
+        end
+      end
+    end
 
+    lflog(message)
     # Params needed for every CloudFare API call
     @cloudflare_api_basic_params = {
       tkn:   @options[:api_token],
@@ -78,7 +92,7 @@ class LiveFlare
     @mecha.get @livebox_auth_url, @livebox_admin_params
   rescue Exception
     puts "Failed to authenticate on the Livebox! Retrying in 100s.."
-    p $!, *$@
+    puts $!
     sleep 100
     retry
   end
@@ -97,7 +111,7 @@ class LiveFlare
     nil
   rescue Exception
     puts "Failed to query #{@options[:api_zone]}'s IP on CloudFlare!"
-    p $!, *$@
+    puts $!
     nil
   end
 
@@ -116,7 +130,7 @@ class LiveFlare
     puts "Successfully changed #{@options[:api_zone]}'s CloudFlare IP to #{new_ip} =)"
   rescue Exception
     puts "Failed to set #{@options[:api_zone]}'s new CloudFlare IP!"
-    p $!, *$@
+    puts $!
   end
 
   def get_livebox_wanip
@@ -145,7 +159,7 @@ class LiveFlare
     nil
   rescue Exception
     puts "Failed to retrieve Livebox's WANIP!"
-    p $!, *$@
+    puts $!
     nil
   end
 
