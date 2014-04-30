@@ -3,7 +3,10 @@ require 'dante'
 require_relative 'lib/liveflare'
 
 class OptionParser
-  attr_accessor :stack
+  def remove_switch(short_name, long_name)
+    self.stack[2].long.reject! { |k| k == long_name }
+    self.stack[2].short.reject! { |k| k == short_name }
+  end
 end
 
 module Dante
@@ -18,14 +21,9 @@ runner = Dante::Runner.new('liveflare')
 
 liveflare = LiveFlare.new
 
-def remove_switch(opts, short_name, long_name)
-  opts.stack[2].long.reject! { |k| k == long_name }
-  opts.stack[2].short.reject! { |k| k == short_name }
-end
-
 # Set custom options
 runner.with_options do |opts|
-  remove_switch(opts, "port", "p")
+  opts.remove_switch("port", "p")
   liveflare.add_options(opts)
 end
 
