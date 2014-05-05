@@ -4,8 +4,8 @@ require_relative 'lib/liveflare'
 
 class OptionParser
   def remove_switch(short_name, long_name)
-    self.stack[2].long.reject! { |k| k == long_name }
-    self.stack[2].short.reject! { |k| k == short_name }
+    @stack[2].long.reject! { |k| k == long_name }
+    @stack[2].short.reject! { |k| k == short_name }
   end
 end
 
